@@ -1,6 +1,7 @@
 import http from 'http';
 import { Database } from './database.js';
 import { json } from './middlewares/json.js';
+import { randomUUID } from 'crypto';
 
 // - HTTP
 // - Método HTTP
@@ -46,7 +47,7 @@ const server = http.createServer(async (req, res) => {
         const { name, email } = req.body;
     
         const user = {
-            id: 1,
+            id: randomUUID(),
             name,
             email,
         };
