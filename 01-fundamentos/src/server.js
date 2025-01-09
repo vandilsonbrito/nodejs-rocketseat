@@ -1,7 +1,6 @@
 import http from 'http';
-import { Database } from './database.js';
 import { json } from './middlewares/json.js';
-import { randomUUID } from 'crypto';
+import { routes } from './routes.js';
 
 // - HTTP
 // - Método HTTP
@@ -26,36 +25,20 @@ import { randomUUID } from 'crypto';
 // 400 - 499 - Client Error
 // 500 - 599 - Server Error
 
-const database = new Database();
-
 const server = http.createServer(async (req, res) => {
 
     const { method, url } = req;
 
     await json(req, res);
 
-    if(method === 'GET' && url === '/users') {
+   const route = routes.find(route => {
+        return route.method === method && route.path === url;
+   });
 
-        const users = database.select('users');
+   if(route) {
+        return route.handler(req, res);
+   }
 
-        return res
-            .setHeader('Content-Type', 'application/json')
-            .end(JSON.stringify(users));
-    }
-
-    if (method === 'POST' && url === '/users') {
-        const { name, email } = req.body;
-    
-        const user = {
-            id: randomUUID(),
-            name,
-            email,
-        };
-    
-        database.insert('users', user);
-    
-        return res.writeHead(201).end();
-    }
     return res.writeHead(404).end();
 })
 
