@@ -1,7 +1,14 @@
-db.json
+# Dependencies
 node_modules
 .DS_Store
-db
+
+# Environment
 .env
 .env.test
+
+# Database
+02-api-rest-nodejs/db/*.db
+db.json
+
+# Build
 dist
