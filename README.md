@@ -1,2 +1,2 @@
-Repository intended for learning - Node.js - containing explanations and projects
+Repository intended for learning - Node.js - containing explanations and projects 
 
