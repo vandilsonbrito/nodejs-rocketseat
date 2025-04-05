@@ -13,3 +13,4 @@ db.json
 # Build
 dist
 build
+coverage
