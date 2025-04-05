@@ -9,15 +9,15 @@ interface RegisterRequest {
     password: string
 }
 
-interface RegisterServiceResponse {
+interface RegisterUseCaseResponse {
     user: User
 }
 
 // Dependency Inversion Principle
-export class RegisterService { 
+export class RegisterUseCase { 
     constructor(private usersRepository: UsersRepository) {}
 
-    async execute({ name, email, password }: RegisterRequest): Promise<RegisterServiceResponse> {
+    async execute({ name, email, password }: RegisterRequest): Promise<RegisterUseCaseResponse> {
         const password_hash = await hash(password, 6)
     
         const userWithSameEmail = await this.usersRepository.findByEmail(email)
