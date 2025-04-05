@@ -4,7 +4,7 @@ import { compare } from 'bcryptjs'
 import { InMemoryUsersRepository } from 'repositories/in-memory/in-memory-users-repository'
 import { UserAlreadyExistsError } from './errors/user-already-exists-error'
 
-describe('Register service', () => {
+describe('Register Use Case', () => {
     it('should hash user password upon registration', async () => {
         const usersRepository = new InMemoryUsersRepository()
         const registerUseCase = new RegisterUseCase(usersRepository)
@@ -20,6 +20,7 @@ describe('Register service', () => {
             user.password_hash
         )
         expect(isPasswordCorrectlyHashed).toBe(true)
+        expect(user.id).toEqual(expect.any(String))
     })
 
     it('should not be able to register with same email twice', async () => {
