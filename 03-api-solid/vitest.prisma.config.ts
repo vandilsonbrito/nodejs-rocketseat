@@ -5,6 +5,6 @@ export default defineConfig({
   plugins: [tsconfigPaths()],
   test: {
     environment: 'prisma',
-    include: ['src/http/controllers/**/*.spec.ts'],
+    include: ['src/http/controllers/**'],
   },
 });
