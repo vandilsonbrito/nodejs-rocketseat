@@ -44,8 +44,8 @@ model Gym {
   title       String
   description String
   phone       String
-  latitude    Decimal
-  longitude   Decimal
+  latitude    Decimal   @db.Decimal(10,6)
+  longitude   Decimal   @db.Decimal(10,6)
 
   CheckIns     CheckIn[]
 
