@@ -1,10 +1,15 @@
-/*
-  Warnings:
+-- Atualiza valores inválidos (opcional, se houver dados problemáticos)
+UPDATE "gyms"
+SET latitude = NULL
+WHERE latitude !~ '^-?[0-9]+\\.?[0-9]*$'
+   OR latitude IS NOT NULL AND TRIM(latitude) = '';
 
-  - You are about to alter the column `latitude` on the `gyms` table. The data in that column could be lost. The data in that column will be cast from `DoublePrecision` to `Decimal(65,30)`.
-  - You are about to alter the column `longitude` on the `gyms` table. The data in that column could be lost. The data in that column will be cast from `DoublePrecision` to `Decimal(65,30)`.
+UPDATE "gyms"
+SET longitude = NULL
+WHERE longitude !~ '^-?[0-9]+\\.?[0-9]*$'
+   OR longitude IS NOT NULL AND TRIM(longitude) = '';
 
-*/
--- AlterTable
-ALTER TABLE "gyms" ALTER COLUMN "latitude" SET DATA TYPE DECIMAL(65,30),
-ALTER COLUMN "longitude" SET DATA TYPE DECIMAL(65,30);
+-- Altera o tipo das colunas com conversão explícita
+ALTER TABLE "gyms"
+ALTER COLUMN "latitude" SET DATA TYPE DECIMAL(10,6) USING (latitude::DECIMAL(10,6)),
+ALTER COLUMN "longitude" SET DATA TYPE DECIMAL(10,6) USING (longitude::DECIMAL(10,6));
