@@ -4,13 +4,17 @@ import '@fastify/jwt'
 declare module 'fastify' {
 
   interface FastifyRequest {
-    jwtVerify(): Promise<void>
+    jwtVerify(options?: {
+      onlyCookie?: boolean
+    }): Promise<void>
     user: {
       sub: string
     }
+    
   }
+  
 
   interface FastifyReply {
     jwtSign(payload: object, options?: object): Promise<string>
   }
-}
+} 
