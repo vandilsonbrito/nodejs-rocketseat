@@ -9,11 +9,11 @@ declare module 'fastify' {
     }): Promise<void>
     user: {
       sub: string
+      role: 'ADMIN' | 'MEMBER'
     }
     
   }
   
-
   interface FastifyReply {
     jwtSign(payload: object, options?: object): Promise<string>
   }
