@@ -13,7 +13,7 @@ import request from 'supertest'
    })
  
    it('should be able to create a gym', async () => {
-     const { token } = await createAndAuthenticateUser(app)
+     const { token } = await createAndAuthenticateUser(app, true)
  
      const response = await request(app.server)
        .post('/gyms')
@@ -25,7 +25,7 @@ import request from 'supertest'
          latitude: -27.2092052,
          longitude: -49.6401091,
        })
- 
+       
      expect(response.statusCode).toEqual(201)
    })
  })
